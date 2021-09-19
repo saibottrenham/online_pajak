@@ -8,15 +8,15 @@ from .models import TaxDataModel
 
 # Create your views here.
 
-
 @method_decorator(csrf_exempt, name='dispatch')
 class ThirdPartyVerification(View):
 
     def get(self, request):
         # Filter Db by company name. If it exist return
-        companies_query_set = TaxDataModel.objects.filter(company_name=request.GET.get('q'))
         return JsonResponse(
-            {"message": "Exists"} if list(companies_query_set.values()) else {"message": "No Entries"}
+            {"message": "Exists"} if 
+            TaxDataModel.objects.filter(company_name=request.GET.get('q'))
+            else {"message": "No Entries"}
         )
            
 
@@ -24,16 +24,11 @@ class ThirdPartyVerification(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class TaxDataCommercialRelScoring(View):
     def get(self, request):
-        items_count = TaxDataModel.objects.count() 
-        items = TaxDataModel.objects.all()  
-
-        items_data = []  
-        for item in items:
-            items_data.append(item)
-
-        data = {
-            'items': items_data,
-            'count': items_count,
-        }
-        return JsonResponse(data)
+        return JsonResponse({
+            "total transactions": TaxDataModel.objects.filter(
+                    vendor_id=request.GET.get('vendor_id')
+                ).filter(
+                    company_id=request.GET.get('company_id')
+                ).count()
+            })
 
