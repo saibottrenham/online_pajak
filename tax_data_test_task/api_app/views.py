@@ -12,7 +12,7 @@ from .models import TaxDataModel
 class ThirdPartyVerification(View):
 
     def get(self, request):
-        # Filter Db by company name. If it exist return
+        # Filter Db by company name.
         return JsonResponse(
             {"message": "Exists"} if 
             TaxDataModel.objects.filter(company_name=request.GET.get('q'))
@@ -24,6 +24,7 @@ class ThirdPartyVerification(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class TaxDataCommercialRelScoring(View):
     def get(self, request):
+        # Count transactions between company and vendor
         return JsonResponse({
             "total transactions": TaxDataModel.objects.filter(
                     vendor_id=request.GET.get('vendor_id')

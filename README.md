@@ -55,7 +55,7 @@ http://localhost:8000/admin/api_app/taxdatamodel/
 ```
 
 In order to search for organisations by name, consider the following. A name can be entered in natural language in the latest
-vesion in google chrome using the address bar. For example, `PD Gunarto Rajata Tbk` will resolve to the following url endpoint when pressing enter after copy pasting it into the search bar. In a request from another api, we would consider query parsing and encoding but it is not needed to test the endpoint using described method. 
+vesion in google chrome using the address bar. For example, `PD Gunarto Rajata Tbk` will resolve to the following url endpoint when pressing enter after copy pasting it into the search bar. In a request from another api, we would consider query parsing and encoding but it is not needed to test the endpoint using described method. Please note that for this demo, the app expects full and complete names. In order to make it more user friendly, we would be able to apply auto complete input fields and fuzzy search logic. 
 
 ```console
 http://localhost:8000/third-party/?q=PD Gunarto Rajata Tbk -(will become)->  http://localhost:8000/third-party/?q=PD%20Gunarto%20Rajata%20Tbk
